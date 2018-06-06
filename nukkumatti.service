@@ -1,0 +1,15 @@
+[Unit]
+Description=Nukkumatti Server
+
+[Service]
+WorkingDirectory=/opt/nukkumatti
+ExecStart=/opt/nukkumatti/Nukkumatti.Web
+Restart=always
+RestartSec=10  # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=nukkumatti
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://localhost:5000
+
+[Install]
+WantedBy=multi-user.target

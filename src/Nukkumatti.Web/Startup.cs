@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -39,8 +40,8 @@ namespace Nukkumatti.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            var dbContext = app.ApplicationServices.GetRequiredService<NukkumattiDbContext>();
-            dbContext.Database.Migrate();
+            //var dbContext = app.ApplicationServices.GetService<NukkumattiDbContext>();
+            //dbContext.Database.Migrate();
 
             if (env.IsDevelopment())
             {
@@ -51,6 +52,11 @@ namespace Nukkumatti.Web
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

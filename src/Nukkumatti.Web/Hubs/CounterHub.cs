@@ -16,30 +16,18 @@ namespace Nukkumatti.Web.Hubs
             _context = context;
         }
 
-        public async Task Increment(int amount)
+        public async Task Change(int amount)
         {
+            var type = amount < 0 ? EventType.Decrement : EventType.Increment;
             var latestSituation = await _context.Situations.LastOrDefaultAsync();
             if (latestSituation == null)
             {
-                await UpdateSituationAsync(EventType.Increment, 0);
+                await UpdateSituationAsync(type, 0);
             }
             else
             {
-                await UpdateSituationAsync(EventType.Increment, latestSituation.Count + amount);
-            }
-        }
-
-        public async Task Decrement(int amount)
-        {
-            var latestSituation = await _context.Situations.LastOrDefaultAsync();
-            if (latestSituation == null)
-            {
-                await UpdateSituationAsync(EventType.Decrement, 0);
-            }
-            else
-            {
-                var newCount = latestSituation.Count - amount;
-                await UpdateSituationAsync(EventType.Decrement, newCount > 0 ? newCount : 0);
+                var newCount = latestSituation.Count + amount;
+                await UpdateSituationAsync(type, newCount > 0 ? newCount : 0);
             }
         }
 

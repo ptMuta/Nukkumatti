@@ -1,13 +1,25 @@
-<div class="card" style="width: 20rem">
+<div class="card">
   <h5 class="card-title">Nukkujia tällä hetkellä: {{ currentCount}}</h5>
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <button (click)="increment()" class="btn btn-primary">+</button>
     </div>
-    <input [(ngModel)]="changeValue" placeholder="#" class="form-control" (keyup)="onKeyUp($event)">
+    <input [(ngModel)]="changeValue" placeholder="#" class="form-control" (keyup)="onInputKeyUp($event)">
     <div class="input-group-append">
       <button (click)="decrement()" class="btn btn-danger">-</button>
     </div>
   </div>
   <div class="overlay" *ngIf="loading">Ladataan</div>
+</div>
+<ul class="list-group">
+  <li *ngFor="let entry of history | slice:0:10" class="list-group-item">
+    [{{ entry.time | date:'dd.MM.yyyy HH:mm:ss' }}] {{ entry.type === 0 ? 'Vähennetty' : 'Lisätty' }} {{ entry.amount }}
+  </li>
+</ul>
+<div class="direction-switch">
+  Poistuvien suunta
+  <div class="btn-group" role="group">
+    <button type="button" class="btn-secondary" [ngClass]="{'active': exitDirection === 0}" (click)="setExitDirection(0)">Oikealle</button>
+    <button type="button" class="btn-secondary" [ngClass]="{'active': exitDirection === 1}" (click)="setExitDirection(1)">Vasemmalle</button>
+  </div>
 </div>

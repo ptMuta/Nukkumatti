@@ -1,0 +1,11 @@
+<div class="card" style="width: 20rem">
+  <h5 class="card-title">Nukkujia tällä hetkellä: {{ currentCount}}</h5>
+  <div class="input-group mb-3">
+    <input [(ngModel)]="changeValue" placeholder="#" class="form-control">
+    <div class="input-group-append">
+      <button (click)="increment()" class="btn btn-primary">+</button>
+      <button (click)="decrement()" class="btn btn-danger">-</button>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="loading">Ladataan</div>
+</div>

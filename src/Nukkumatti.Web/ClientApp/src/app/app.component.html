@@ -19,7 +19,7 @@
 <div class="direction-switch">
   Poistuvien suunta
   <div class="btn-group" role="group">
-    <button type="button" class="btn-secondary" [ngClass]="{'active': exitDirection === 0}" (click)="setExitDirection(0)">Oikealle</button>
-    <button type="button" class="btn-secondary" [ngClass]="{'active': exitDirection === 1}" (click)="setExitDirection(1)">Vasemmalle</button>
+    <button type="button" class="btn btn-outline-primary" [ngClass]="{'active': exitDirection === 1}" (click)="setExitDirection(1)">Vasemmalle</button>
+    <button type="button" class="btn btn-outline-primary" [ngClass]="{'active': exitDirection === 0}" (click)="setExitDirection(0)">Oikealle</button>
   </div>
 </div>

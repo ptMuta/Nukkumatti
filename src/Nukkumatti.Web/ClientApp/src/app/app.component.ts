@@ -47,4 +47,9 @@ export class AppComponent {
     this.changeValue = undefined;
   }
 
+  async onKeyUp(event) {
+    if (event.keyCode === 13) {
+      await this.increment();
+    }
+  }
 }

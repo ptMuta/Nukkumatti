@@ -39,6 +39,9 @@ namespace Nukkumatti.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var dbContext = app.ApplicationServices.GetRequiredService<NukkumattiDbContext>();
+            dbContext.Database.Migrate();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
